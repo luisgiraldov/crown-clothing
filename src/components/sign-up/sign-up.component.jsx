@@ -3,6 +3,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import './sign-up.styles.scss';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import Validators from '../validators/validators.component';
 
 class SignUp extends Component {
     constructor() {
@@ -19,6 +20,11 @@ class SignUp extends Component {
     handleSubmit = async event => {
         event.preventDefault();
         const { displayName, email, password, confirmPassword } = this.state;
+
+        if(!Validators.passwordValidator(password)) {
+            alert("Please provide a valid password, with a combination of Capital letters, numbers and special characters!");
+            return;
+        }
 
         if(password !== confirmPassword) {
             alert("passwords don't match");
