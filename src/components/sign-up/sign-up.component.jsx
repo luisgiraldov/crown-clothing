@@ -3,7 +3,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import './sign-up.styles.scss';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import Validators from '../validators/validators.component';
+import Validators from '../../validators/validators';
 
 class SignUp extends Component {
     constructor() {

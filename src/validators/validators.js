@@ -46,9 +46,11 @@ function confirmPasswordValidator(password, confirmPassword) {
     return passwordMatch;
 }
 
-export default {
+const Validator = {
     nameValidator,
     emailValidator,
     passwordValidator,
     confirmPasswordValidator
 };
+
+export default Validator;
