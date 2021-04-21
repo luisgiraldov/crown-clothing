@@ -9,8 +9,8 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 
-
-const Header = ({ currentUser }) => (
+//We destructure state from redux (currentUser... and so on)
+const Header = ({ currentUser, hidden }) => (
     <div className="header">
         <Link className="logo-container" to="/">
             <Logo className="logo" />
@@ -29,12 +29,21 @@ const Header = ({ currentUser }) => (
             }
             <CartIcon />
         </div>
-        <CartDropdown />
+        {hidden ? null : <CartDropdown />}
     </div>
 );
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
-})
+//One way to destructure state from redux store
+// const mapStateToProps = state => ({
+//     currentUser: state.user.currentUser
+// })
+
+
+//This is another way where we can destructure nested values
+//for example we destructure user from state, and then we destructure currentUser from user
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser,
+    hidden
+});
 
 export default connect(mapStateToProps)(Header);
