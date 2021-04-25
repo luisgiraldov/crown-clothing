@@ -8,6 +8,7 @@ import Header from './components/header/header.component';
 import ShopPage from './pages/shop/shop.component';
 import HomePage from './pages/homepage/homepage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
+import CheckoutPage from './pages/checkout/checkout.component';
 import { setCurrentUser } from './redux/user/user.actions';
 
 //selector 
@@ -47,7 +48,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          
+          <Route exact path='/checkout' component={CheckoutPage} />
           {/** If there is an user redirect to home page otherwise render the SignInAndSignUpPage */}
           <Route path='/signin' render={
             () => this.props.currentUser ? 
