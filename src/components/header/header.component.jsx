@@ -7,6 +7,11 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
+//selector
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+
 import './header.styles.scss';
 
 //We destructure state from redux (currentUser... and so on)
@@ -41,9 +46,15 @@ const Header = ({ currentUser, hidden }) => (
 
 //This is another way where we can destructure nested values
 //for example we destructure user from state, and then we destructure currentUser from user
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser,
-    hidden
-});
+// const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+//     currentUser,
+//     hidden
+// });
+
+//Using reselect, we make use of reselect method createStructuredSelector to pass the selectors
+const mapStateToProps = createStructuredSelector({ 
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
+ })
 
 export default connect(mapStateToProps)(Header);

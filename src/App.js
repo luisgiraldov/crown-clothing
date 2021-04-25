@@ -10,6 +10,10 @@ import HomePage from './pages/homepage/homepage.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import { setCurrentUser } from './redux/user/user.actions';
 
+//selector 
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selectors';
+
 class App extends Component {
 
   unsubscribeFromAuth = null;
@@ -56,9 +60,15 @@ class App extends Component {
   }
 }
 
-//connect to redux to get state
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+// //connect to redux to get state
+// const mapStateToProps = ({ user }) => ({
+//   currentUser: user.currentUser
+// });
+
+//connect to redux to get state by using reselect to avoid unnecesary rerenders when some state properties haven't changed
+//reselect pass in the state
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 //connect to redux to modify the state
