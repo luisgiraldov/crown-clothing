@@ -2,17 +2,6 @@ import { createSelector } from 'reselect';
 //memoize using lodash
 import memoize from 'lodash.memoize';
 
-//we need this object because our url is a string, example hats, sneakers, etc. 
-//And the id we want to match (from shop.data.js) is a number, so we write this map where the string value goes to the id value (number)
-//
-const COLLECTION_ID_MAP = {
-    hats: 1,
-    sneakers: 2,
-    jackets: 3,
-    womens: 4,
-    mens: 5
-};
-
 const selectShop = state => state.shop;
 
 export const selectShopCollections = createSelector(
@@ -24,10 +13,7 @@ export const selectShopCollections = createSelector(
 export const selectShopCollection = memoize(collectionUrlParam => 
     createSelector(
         [selectShopCollections],
-        collections => 
-            collections.find( collection => 
-                collection.id === COLLECTION_ID_MAP[collectionUrlParam]
-            )
+        collections => collections[collectionUrlParam]
     )
 ); //end memoize
 /**
