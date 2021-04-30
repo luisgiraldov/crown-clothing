@@ -9,6 +9,12 @@ export const selectShopCollections = createSelector(
     shop => shop.collections
 );
 
+//convert the collections object into an array
+export const selectShopCollectionsForPreview = createSelector(
+    [selectShopCollections],
+    collections => Object.keys(collections).map(key => collections[key])
+);
+
 //it receives the url parameter to search into the collections (e.g. hats, sneakers)
 export const selectShopCollection = memoize(collectionUrlParam => 
     createSelector(
