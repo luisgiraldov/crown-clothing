@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 //Auth firebase
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-  // How to make use of  addCollectionAndDocuments to programatically add shop data into firebase
-  // import {  addCollectionAndDocuments  } from './firebase/firebase.utils';
-  //this selector brings info from redux based on the info that got from shop.data.js, that is the file that contains the shop data
-  //import { selectShopCollectionsForPreview } from './redux/shop/shop.selectors';
+  
 //Redux
 import { connect } from 'react-redux';
 
@@ -27,9 +24,6 @@ class App extends Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
-    // How to make use of  addCollectionAndDocuments to programatically add shop data into firebase
-    //we destructure the collectionArray passed from mapStateToProps
-    //const { collectionArray } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth) {
@@ -41,14 +35,8 @@ class App extends Component {
           });
         });
       }  else {
+        //Set Current User into redux
         setCurrentUser(userAuth);
-        // How to make use of  addCollectionAndDocuments to programatically add shop data into firebase
-        //we send a new array off the collectionsArray, destructuring just the properties we need (title and items) from 
-        //the obj that pass from each iteration, we do this to send to firestore just the properties we want
-        // addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({
-        //   title, 
-        //   items 
-        // })));
       } 
     });
   }
@@ -87,12 +75,6 @@ class App extends Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
-
-// How to make use of  addCollectionAndDocuments to programatically add shop data into firebase
-// const mapStateToProps = createStructuredSelector({
-//   currentUser: selectCurrentUser,
-//   collectionsArray: selectShopCollectionsForPreview
-// });
 
 //connect to redux to modify the state
 const mapDispatchToProps = dispatch => ({
