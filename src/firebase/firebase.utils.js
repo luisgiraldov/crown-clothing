@@ -26,7 +26,26 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         }
     }
     return userRef;
-}
+};
+
+//Create a collection into firebase
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+
+    //We create a batch to make sure all the calls were made and all the documents were created
+    const batch = firestore.batch();
+    objectsToAdd.forEach(obj => {
+        //randomly generates a unique id for each obj, if you pass something inside the parenthesis, 
+        //it will use that as id, instead of the random id.
+        //this becomes the key(id) on firestore
+        const newDocRef = collectionRef.doc();
+
+        batch.set(newDocRef, obj);
+    });
+
+    //this will fire off our batch request, and it returns a promise, if it success it will resolve a void value(null)
+    return await batch.commit()
+};
 
 firebase.initializeApp(Config);
 
