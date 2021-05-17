@@ -6,9 +6,13 @@ import logger from 'redux-logger';
 //track of cart items when the page refreshes or the browser is closed)
 import { persistStore } from 'redux-persist';
 
+//Allow asynchronous functions with redux
+import thunk from 'redux-thunk';
+
 import rootReducer from './root-reducer';
 
-const middlewares = [logger];
+//we add the middlewares we need into this arry to later pass them to the createStore function
+const middlewares = [logger, thunk];
 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares))
 
