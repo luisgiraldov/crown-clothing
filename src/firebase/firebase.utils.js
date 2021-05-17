@@ -69,6 +69,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 firebase.initializeApp(Config);
 
 export const auth = firebase.auth();
+//Firestore reference to our database
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
