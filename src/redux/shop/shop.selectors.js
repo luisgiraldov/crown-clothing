@@ -4,6 +4,14 @@ import memoize from 'lodash.memoize';
 
 const selectShop = state => state.shop;
 
+//returns a boolean value because of the !!, to check if it is a truthy value
+export const selectIsCollectionLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)
+
+export const selectIsCollectionFetching = createSelector([selectShop], shop => shop.isFetching);
+
 export const selectShopCollections = createSelector(
     [selectShop],
     shop => shop.collections
@@ -46,3 +54,4 @@ export const selectShopCollection = memoize(collectionUrlParam =>
  * same value as last time, which we've memoized so just return 
  * the selector that's been stored.
  */
+
