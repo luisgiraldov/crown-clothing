@@ -1,3 +1,4 @@
+//This file is a HOC
 import React from 'react';
 
 import { SpinnerContainer, SpinnerOverlay } from './with-spiner.styles';
